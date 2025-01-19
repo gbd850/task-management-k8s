@@ -31,6 +31,13 @@ spec:
                   name : db-config
                   key :  dbName
 
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
 
           ports:
             - containerPort: 3306
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
