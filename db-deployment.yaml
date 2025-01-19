@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+    tier: database
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+      tier: database
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+        tier: database
+    spec:
+      containers:
+        - image: mysql:8.3
+          name: mysql
+          env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "true"
+
+            - name: MYSQL_DATABASE
+              valueFrom :
+                configMapKeyRef :
+                  name : db-config
+                  key :  dbName
+
+
+          ports:
+            - containerPort: 3306

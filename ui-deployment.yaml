@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-management-frontend
+spec:
+  selector:
+    matchLabels:
+      app: task-management-frontend
+  template:
+    metadata:
+      labels:
+        app: task-management-frontend
+    spec:
+      containers:
+        - name: task-management-frontend
+          image: gbd850/task-management-ui:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4200

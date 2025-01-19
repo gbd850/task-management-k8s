@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-management-backend
+spec:
+  selector:
+    matchLabels:
+      app: task-management-backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: task-management-backend
+    spec:
+      containers:
+        - name: task-management-backend
+          image: gbd850/task-management-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MY_SQL_HOST
+              value: mysql
