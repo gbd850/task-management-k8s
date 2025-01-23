@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: task-management-frontend-svc
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: task-management-frontend
   ports:
     - protocol: "TCP"
       port: 4200 
       targetPort: 4200
+      nodePort: 30007
